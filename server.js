@@ -5,6 +5,9 @@ import connectDB from './config/db.js'
 import contactRoutes from './routes/contactRoutes.js'
 import authRoutes from './routes/authRoutes.js'
 import projectRoutes from './routes/projectRoutes.js'
+import skillRoutes from './routes/skillRoutes.js'
+import serviceRoutes from './routes/serviceRoutes.js'
+import testimonialRoutes from './routes/testimonialRoutes.js'
 
 dotenv.config()
 connectDB()
@@ -21,6 +24,9 @@ app.get('/', (req, res) => {
 app.use('/api/contact', contactRoutes)
 app.use('/api/auth', authRoutes)
 app.use('/api/projects', projectRoutes)
+app.use('/api/skills', skillRoutes)
+app.use('/api/services', serviceRoutes)
+app.use('/api/testimonials', testimonialRoutes)
 
 const PORT = process.env.PORT || 5000
 
