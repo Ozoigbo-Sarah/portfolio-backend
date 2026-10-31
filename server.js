@@ -14,7 +14,25 @@ connectDB()
 
 const app = express()
 
-app.use(cors())
+const allowedOrigins = process.env.CLIENT_URL
+  ? process.env.CLIENT_URL.split(',').map((url) => url.trim())
+  : null
+
+app.use(
+  cors(
+    allowedOrigins
+      ? {
+          origin: (origin, callback) => {
+            if (!origin || allowedOrigins.includes(origin)) {
+              callback(null, true)
+            } else {
+              callback(new Error('Not allowed by CORS'))
+            }
+          },
+        }
+      : {}
+  )
+)
 app.use(express.json())
 
 app.get('/', (req, res) => {
